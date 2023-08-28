@@ -53,12 +53,6 @@ describe('App Component Tests', () => {
     expect(window.location.reload).toHaveBeenCalled();
   });
 
-  test('App component displays correct title in AppBar', () => {
-    const title = 'Test Title';
-    const wrapper = shallow(<App />);
-    wrapper.find(AppBar).props().title = title;
-    expect(wrapper.find(AppBar).props().title).toBe(title);
-  });
 
   test('App component increment button increases count when clicked', () => {
     const wrapper = shallow(<App />);
@@ -74,4 +68,30 @@ describe('App Component Tests', () => {
     decrementButton.simulate('click');
     expect(wrapper.state('count')).toBe(4);
   });
+
+  test('App component displays correct title in AppBar', () => {
+    const title = 'Counter App';
+    const wrapper = shallow(<App />);
+    const appBarTitle = wrapper.find(AppBar).prop('title');
+    expect(appBarTitle).toBe(title);
+  });
+
+  test('App component resets count to 0 when Window Reset button is clicked', () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({ count: 5 });
+  
+    const reloadMock = jest.fn();
+    Object.defineProperty(window.location, 'reload', {
+      configurable: true,
+      value: reloadMock,
+    });
+  
+    wrapper.instance().handleWindowReset();
+    expect(wrapper.state('count')).toBe(0);
+    expect(reloadMock).toHaveBeenCalled();
+  
+    // Clean up
+    delete window.location.reload;
+  });
+
 });
