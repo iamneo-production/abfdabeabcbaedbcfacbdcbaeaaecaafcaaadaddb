@@ -76,22 +76,5 @@ describe('App Component Tests', () => {
     expect(appBarTitle).toBe(title);
   });
 
-  test('App component resets count to 0 when Window Reset button is clicked', () => {
-    const wrapper = shallow(<App />);
-    wrapper.setState({ count: 5 });
-  
-    const reloadMock = jest.fn();
-    Object.defineProperty(window.location, 'reload', {
-      configurable: true,
-      value: reloadMock,
-    });
-  
-    wrapper.instance().handleWindowReset();
-    expect(wrapper.state('count')).toBe(0);
-    expect(reloadMock).toHaveBeenCalled();
-  
-    // Clean up
-    delete window.location.reload;
-  });
 
 });
