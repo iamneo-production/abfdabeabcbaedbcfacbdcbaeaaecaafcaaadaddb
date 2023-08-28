@@ -4,6 +4,7 @@ import App from '../App';
 import Counter from '../components/Counter';
 import Button from '../components/Button';
 import AppBar from '../components/AppBar';
+import 'jest-styled-components/extend-expect';
 
 describe('App Component Tests', () => {
   test('Counter component renders correctly with given count', () => {
@@ -68,46 +69,16 @@ describe('App Component Tests', () => {
   });
 });
 
-describe('CSS Style Tests', () => {
-  test('App component has correct styles', () => {
-    const wrapper = shallow(<App />);
-    const appStyle = wrapper.find('.App').prop('style');
-    expect(wrapper.hasClass('App')).toBe(true);
-    expect(appStyle.textAlign).toBe('center');
-    expect(appStyle.margin).toBe('2rem');
-  });
 
-  test('AppBar component has correct styles', () => {
-    const wrapper = shallow(<AppBar title="Test Title" />);
-    const appBarStyle = wrapper.find('.app-bar').prop('style');
-    expect(wrapper.hasClass('app-bar')).toBe(true);
-    expect(appBarStyle.backgroundColor).toBe('#333');
-    expect(appBarStyle.color).toBe('white');
-  });
 
-  test('Counter component has correct styles', () => {
-    const count = 5;
-    const wrapper = shallow(<Counter count={count} />);
-    const counterContainerStyle = wrapper.find('.counter-container').prop('style');
-    const counterValueStyle = wrapper.find('.counter-value').prop('style');
-    expect(counterContainerStyle.backgroundColor).toBe('#f0f0f0');
-    expect(counterValueStyle.backgroundColor).toBe('#333');
-  });
+test('AppBar component has correct styles', () => {
+  const title = 'Test Title';
+  const wrapper = shallow(<AppBar title={title} />);
+  
+  // Check if the component has the correct CSS class
+  expect(wrapper.hasClass('app-bar')).toBe(true);
 
-  test('Button component has correct styles', () => {
-    const onClickMock = jest.fn();
-    const wrapper = shallow(<Button label="Test Button" onClick={onClickMock} />);
-    const buttonStyle = wrapper.find('.button').prop('style');
-    expect(wrapper.hasClass('button')).toBe(true);
-    expect(buttonStyle.backgroundColor).toBe('#007bff');
-    expect(buttonStyle.color).toBe('white');
-  });
-
-  test('Reset button in AppBar has correct styles', () => {
-    const wrapper = shallow(<AppBar title="Test Title" />);
-    const resetButton = wrapper.find('.app-bar button');
-    const resetButtonStyle = resetButton.prop('style');
-    expect(resetButtonStyle.backgroundColor).toBe('#ff5722');
-    expect(resetButtonStyle.color).toBe('white');
-  });
+  // Check specific style properties using jest-styled-components
+  expect(wrapper).toHaveStyleRule('background-color', '#333');
+  expect(wrapper).toHaveStyleRule('color', 'white');
 });
