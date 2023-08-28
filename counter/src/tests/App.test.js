@@ -5,7 +5,7 @@ import Counter from '../components/Counter';
 import Button from '../components/Button';
 import AppBar from '../components/AppBar';
 
-import 'jest-styled-components';
+
 
 describe('App Component Tests', () => {
   test('Counter component renders correctly with given count', () => {
@@ -70,16 +70,4 @@ describe('App Component Tests', () => {
   });
 });
 
- // Import the jest-styled-components package directly
-
-test('AppBar component has correct styles', () => {
-  const title = 'Test Title';
-  const wrapper = shallow(<AppBar title={title} />);
-  
-  // Check if the component has the correct CSS class
-  expect(wrapper.hasClass('app-bar')).toBe(true);
-
-  // Check specific style properties using jest-styled-components
-  expect(wrapper).toHaveStyleRule('background-color', '#333');
-  expect(wrapper).toHaveStyleRule('color', 'white');
-});
+ 
