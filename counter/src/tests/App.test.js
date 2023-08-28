@@ -4,7 +4,8 @@ import App from '../App';
 import Counter from '../components/Counter';
 import Button from '../components/Button';
 import AppBar from '../components/AppBar';
-import 'jest-styled-components/extend-expect';
+
+import 'jest-styled-components';
 
 describe('App Component Tests', () => {
   test('Counter component renders correctly with given count', () => {
@@ -69,7 +70,7 @@ describe('App Component Tests', () => {
   });
 });
 
-
+ // Import the jest-styled-components package directly
 
 test('AppBar component has correct styles', () => {
   const title = 'Test Title';
