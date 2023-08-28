@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Counter from './Counter';
-import Button from './Button';
-import AppBar from './AppBar';
+import Counter from './components/Counter';
+import Button from './components/Button';
+import AppBar from './components/AppBar';
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
