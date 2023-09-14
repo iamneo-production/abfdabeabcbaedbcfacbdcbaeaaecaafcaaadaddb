@@ -4,99 +4,51 @@ body, h1, h2, h3, p, ul, li {
     padding: 0;
 }
 
-/* Add your CSS styles here to control the appearance of the website elements */
+/* Global styles */
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f8f8f8;
-}
-img {
-    /* display: flex; */
-    margin: auto;
-    float:none;
-    padding: 0px;
+    background-color: #f0f0f0;
+    color: #333;
 }
 
-.cake{
-    margin: 10px 150px;
-    height: 0%;
-}
-.cake img{
-    margin: 0 10px;
-    height: 15%;
-    width: 15%;
-}
-
-.list{
-    text-align: center;
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    margin: 0 60 0;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-}
-
-header h1 {
-    margin: 0;
-    padding: 10px;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #fff;
-}
-
-nav a:hover {
-    color: #f00;
-}
-
-main {
+    gap: 20px;
     padding: 20px;
 }
 
-section.featured-cakes {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.artwork {
+    width: 250px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-section.featured-cakes img {
-    max-width: 25%;
-    margin-bottom: 10px;
+.artwork img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
 }
 
-section.cake-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+.artwork:hover {
+    transform: scale(1.1);
 }
 
-section.cake-gallery img {
-    max-width: 10;
-}
-
-section.contact-form {
-    max-width: 1px;
-    margin: 0 auto;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
+.artwork-details {
     padding: 10px;
+}
+
+.artwork-details h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.artwork-details p {
+    font-size: 14px;
+    color: #888;
 }
