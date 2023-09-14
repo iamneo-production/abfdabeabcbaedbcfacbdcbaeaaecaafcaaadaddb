@@ -3,7 +3,9 @@ body, h1, h2, h3, p, ul, li {
     margin: 0;
     padding: 0;
 }
-
+h1{
+    font-size: 100px;
+}
 /* Add your CSS styles here to control the appearance of the website elements */
 body {
     font-family: Arial, sans-serif;
