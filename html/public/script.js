@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // If form is valid, proceed with form submission
       if (isValid) {
-        alert('Form submitted successfully!');
+       // alert('Form submitted successfully!');
         // You can add additional code here to submit the form data to a server
       }
     });
