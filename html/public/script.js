@@ -1,129 +1,59 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Get references to the form and form elements
-    var registrationForm = document.querySelector('form');
-    var fullNameInput = document.getElementById('fullName');
-    var usernameInput = document.getElementById('username');
-    var emailInput = document.getElementById('email');
-    var phoneNumberInput = document.getElementById('phoneNumber');
-    var passwordInput = document.getElementById('password');
-    var confirmPasswordInput = document.getElementById('confirmPassword');
-    var bioInput = document.getElementById('bio');
-    var profilePictureInput = document.getElementById('profilePicture');
+var quizData = [
+  {
+      question: "What is the capital of France?",
+      options: ["Paris", "London", "Berlin", "Madrid"],
+      answer: "Paris"
+  },
+  {
+      question: "Who painted the Mona Lisa?",
+      options: ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Michelangelo"],
+      answer: "Leonardo da Vinci"
+  },
+  {
+      question: "Which planet is known as the Red Planet?",
+      options: ["Mars", "Jupiter", "Venus", "Saturn"],
+      answer: "Mars"
+  }
+];
 
-    // Event listener for form submission
-    registrationForm.addEventListener('submit', function(event) {
-      // Prevent the form from submitting
-      event.preventDefault();
+var quizContainer = document.getElementById("quiz");
+var submitButton = document.getElementById("submit");
+var resultContainer = document.getElementById("result");
 
-      // Perform form validation
-      var isValid = validateForm();
-
-      // If form is valid, proceed with form submission
-      if (isValid) {
-       // alert('Form submitted successfully!');
-        // You can add additional code here to submit the form data to a server
+function buildQuiz() {
+  var output = "";
+  for (var i = 0; i < quizData.length; i++) {
+      output += '<div class="question">';
+      output += "<h3>Question " + (i + 1) + ":</h3>";
+      output += "<p>" + quizData[i].question + "</p>";
+      output += "<ul class='options'>";
+      for (var j = 0; j < quizData[i].options.length; j++) {
+          output += '<li><label><input type="radio" name="question' + i + '" value="' + quizData[i].options[j] + '"> ' + quizData[i].options[j] + '</label></li>';
       }
-    });
+      output += "</ul>";
+      output += "</div>";
+  }
+  quizContainer.innerHTML = output;
+}
 
-    // Function to validate the form
-    function validateForm() {
-      var isValid = true;
+function showResult() {
+  var score = 0;
+  var userAnswers = [];
+  var answerInputs = document.querySelectorAll('input[type="radio"]:checked');
 
-      // Clear any existing error messages
-      clearErrorMessages();
+  for (var i = 0; i < answerInputs.length; i++) {
+      userAnswers.push(answerInputs[i].value);
+  }
 
-      // Validate full name
-      var fullNameRegex = /^[a-zA-Z]+( [a-zA-Z]+)*$/;
-      if (!fullNameRegex.test(fullNameInput.value.trim())) {
-        displayErrorMessage(fullNameInput, 'Please enter a valid full name.');
-        isValid = false;
+  for (var i = 0; i < quizData.length; i++) {
+      if (userAnswers[i] === quizData[i].answer) {
+          score++;
       }
+  }
 
-      // Validate username
-      var usernameRegex = /^[a-zA-Z0-9]+$/;
-      if (!usernameRegex.test(usernameInput.value.trim())) {
-        displayErrorMessage(usernameInput, 'Please enter a valid username.');
-        isValid = false;
-      }
+  resultContainer.innerHTML = "You scored <span class='score'>" + score + "</span> out of <span class='total'>" + quizData.length + "</span> correct!";
+}
 
-      // Validate email
-      var emailRegex = /^\S+@\S+\.\S+$/;
-      console.log("email",emailRegex.test(emailInput.value.trim()))
-      if (!emailRegex.test(emailInput.value.trim())) {
-        displayErrorMessage(emailInput, 'Please enter a valid email address.');
-        isValid = false;
-      }
+buildQuiz();
 
-      // Validate phone number
-      var phoneRegex = /^\d+$/;
-      console.log("phone",phoneRegex.test(phoneNumberInput.value.trim()))
-      if (!phoneRegex.test(phoneNumberInput.value.trim())) {
-        displayErrorMessage(phoneNumberInput, 'Please enter a valid phone number.');
-        isValid = false;
-      }
-
-      // Validate password
-var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,16}$/;
-      if (!passwordRegex.test(passwordInput.value.trim())) {
-        displayErrorMessage(
-          passwordInput,
-          'Password must contain at least 1 uppercase, 1 lowercase, 1 number, and 1 special character. Min 8, Max 16 characters.'
-        );
-        //Weak123@!
-        isValid = false;
-      }
-
-      // Validate confirm password
-      if (confirmPasswordInput.value.trim() !== passwordInput.value.trim()) {
-        displayErrorMessage(confirmPasswordInput, 'Passwords do not match.');
-        isValid = false;
-      }
-
-      // Validate bio
-      var bioRegex = /^[a-zA-Z0-9 ,.'"]*$/;
-      if (!bioRegex.test(bioInput.value.trim())) {
-        displayErrorMessage(
-          bioInput,
-          'Bio can only contain alphanumeric characters, space, comma, full stop, single quotes, and double quotes.'
-        );
-        isValid = false;
-      }
-
-      // Validate profile picture
-      var profilePicFile = profilePictureInput.files[0];
-      if (profilePicFile) {
-        var allowedExtensions = ['jpg', 'jpeg', 'png'];
-        var fileSizeLimit = 5 * 1024 * 1024; // 5MB in bytes
-
-        var fileExtension = profilePicFile.name.split('.').pop().toLowerCase();
-        var fileSize = profilePicFile.size;
-
-        if (!allowedExtensions.includes(fileExtension) || fileSize > fileSizeLimit) {
-          displayErrorMessage(
-            profilePictureInput,
-            'Please upload a profile picture in JPG or PNG format, up to 5MB in size.'
-          );
-          isValid = false;
-        }
-      }
-
-      return isValid;
-    }
-
-    // Function to display an error message for a specific input field
-    function displayErrorMessage(inputElement, message) {
-      var errorContainer = document.createElement('div');
-      errorContainer.className = 'error-message';
-      errorContainer.textContent = message;
-      errorContainer.style.color = 'red'; // Add this line to set the color to red
-      inputElement.parentNode.appendChild(errorContainer);
-    }
-
-    // Function to clear all error messages
-    function clearErrorMessages() {
-      var errorMessages = document.querySelectorAll('.error-message');
-      errorMessages.forEach(function(errorMessage) {
-        errorMessage.parentNode.removeChild(errorMessage);
-      });
-    }
-  });
+submitButton.addEventListener("click", showResult);
