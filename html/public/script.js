@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Validate phone number
       var phoneRegex = /^\d+$/;
+      console.log("phone",phoneRegex.test(phoneNumberInput.value.trim()))
       if (!phoneRegex.test(phoneNumberInput.value.trim())) {
         displayErrorMessage(phoneNumberInput, 'Please enter a valid phone number.');
         isValid = false;
