@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Validate password
-      var passwordRegex = ;
+      var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,16}$/;
       if (!passwordRegex.test(passwordInput.value.trim())) {
         displayErrorMessage(
           passwordInput,
