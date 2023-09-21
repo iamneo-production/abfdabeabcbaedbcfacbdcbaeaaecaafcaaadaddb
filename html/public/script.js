@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Validate email
       var emailRegex = /^\S+@\S+\.\S+$/;
+      console.log("email",emailRegex.test(emailInput.value.trim()))
       if (!emailRegex.test(emailInput.value.trim())) {
         displayErrorMessage(emailInput, 'Please enter a valid email address.');
         isValid = false;
