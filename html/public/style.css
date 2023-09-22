@@ -41,7 +41,8 @@ button:hover {
     margin-bottom: 5px;
 }
 
-.result {
+
+#result {
     margin-top: 20px;
     font-weight: bold;
 }
