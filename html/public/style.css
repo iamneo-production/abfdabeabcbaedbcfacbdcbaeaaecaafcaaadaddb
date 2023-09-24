@@ -1,55 +1,47 @@
-body {
-    background: black;
-    margin-top: 200px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
 }
 
-#typing {
-    width: 0ch;
+h1 {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
     color: white;
-    float: left;
-    font-family: sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.question {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.question h3 {
+    margin-bottom: 5px;
+}
+
+.options {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 0;
+}
+
+.options li {
+    margin-bottom: 5px;
+}
+
+.result {
+    margin-top: 20px;
     font-weight: bold;
-    font-size: 4.392386530014641vw;
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing 5s steps(22) 1s infinite alternate;
-}
-
-#typing span {
-    color: red;
-}
-
-#crow {
-    float: left;
-    color: white;
-    font-family: consolas;
-    font-weight: bold;
-    font-size: 4.392386530014641vw;
-    animation: crow 0.5s linear 0s infinite;
-}
-
-@keyframes typing {
-    from {
-        width: 0ch;
-    }
-    to {
-        width: 22.5ch;
-    }
-}
-
-@keyframes crow {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.OP {
-    color: blue !important;
-    font-size: 6.222547584187408vw;
 }
